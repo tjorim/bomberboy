@@ -216,7 +216,15 @@ public class View extends Canvas
                     }
                     else if (vw instanceof Portaal)
                     {
-                        g.drawImage(Portaal1, i*grootte, j*grootte, grootte, grootte, this);
+                        // Portaal2 was loaded above but never actually used
+                        // here, so the second portal always rendered as
+                        // the first portal's image regardless of poortNr.
+                        Portaal pt = (Portaal)vw;
+                        if (pt.getPoortNr() == 1) {
+                            g.drawImage(Portaal1, i*grootte, j*grootte, grootte, grootte, this);
+                        } else {
+                            g.drawImage(Portaal2, i*grootte, j*grootte, grootte, grootte, this);
+                        }
                     }
                 }
             }
