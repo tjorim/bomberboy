@@ -990,20 +990,12 @@ public class Model
                         {
                             speelGeluidje(Warning);
                         }
-                        switch (s.getSpelerNr())
+                        // s is already speler1 or speler2, so no need to
+                        // branch on getSpelerNr() to look up the same
+                        // object via the global speler1/speler2 fields.
+                        if (s.getVwOnderSpeler() instanceof Kruit)
                         {
-                            case 1:
-                            if (speler1.getVwOnderSpeler() instanceof Kruit)
-                            {
-                                s.maakVuur(false);
-                            }
-                            break;
-                            case 2:
-                            if (speler2.getVwOnderSpeler() instanceof Kruit)
-                            {
-                                s.maakVuur(false);
-                            }
-                            break;
+                            s.maakVuur(false);
                         }
                     }
                 }
