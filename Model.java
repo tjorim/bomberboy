@@ -974,29 +974,37 @@ public class Model
                 else if (vw instanceof Speler)
                 {
                     Speler s = (Speler)vw;
-                    s.eenLevenMinder();
-                    if (s.getLevens() == 0)
+                    // Only damage a player who is actually on fire. Without
+                    // this check, doofKruit() re-decrements every player's
+                    // life once per lit gunpowder tile in the chain (it's
+                    // called from doofActies() for each one), instead of
+                    // once per actual hit.
+                    if (s.isVuur())
                     {
-                        speelGeluidje(Die);
-                    }
-                    else
-                    {
-                        speelGeluidje(Warning);
-                    }
-                    switch (s.getSpelerNr())
-                    {
-                        case 1:
-                        if (speler1.getVwOnderSpeler() instanceof Kruit)
+                        s.eenLevenMinder();
+                        if (s.getLevens() == 0)
                         {
-                            s.maakVuur(false);
+                            speelGeluidje(Die);
                         }
-                        break;
-                        case 2:
-                        if (speler2.getVwOnderSpeler() instanceof Kruit)
+                        else
                         {
-                            s.maakVuur(false);
+                            speelGeluidje(Warning);
                         }
-                        break;
+                        switch (s.getSpelerNr())
+                        {
+                            case 1:
+                            if (speler1.getVwOnderSpeler() instanceof Kruit)
+                            {
+                                s.maakVuur(false);
+                            }
+                            break;
+                            case 2:
+                            if (speler2.getVwOnderSpeler() instanceof Kruit)
+                            {
+                                s.maakVuur(false);
+                            }
+                            break;
+                        }
                     }
                 }
             }
@@ -1054,7 +1062,10 @@ public class Model
                 {
                     Bom bo = (Bom)doel;
                     setVoorwerp(volgX, volgY, bom);
-                    setVoorwerp(doelX, doelY, speler1);
+                    // Was hardcoded to speler1, so shifting a bomb as
+                    // speler2 placed speler1's sprite on the vacated tile
+                    // while speler2's own x/y moved there too.
+                    setVoorwerp(doelX, doelY, speler);
                     setVoorwerp(speler.getX(), speler.getY(), new Grond());
                     bo.setX(volgX);
                     bo.setY(volgY);
