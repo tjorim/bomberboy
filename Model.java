@@ -27,8 +27,8 @@ public class Model
     private boolean isErEenDode;
     private boolean isHetSpelGereset;
     private boolean hijligt;
-    Portaal portaal1A = new Portaal(1, 3, 3);
-    Portaal portaal1B = new Portaal(2, breedte-4, hoogte-4);
+    Portaal portaal1A = new Portaal(1, 1, 3, 3);
+    Portaal portaal1B = new Portaal(1, 2, breedte-4, hoogte-4);
     /**
      * Hier gaan we alle geluidjes inladen.
      * Source: http://sourceforge.net/projects/bombermanja/

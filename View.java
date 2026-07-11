@@ -216,11 +216,15 @@ public class View extends Canvas
                     }
                     else if (vw instanceof Portaal)
                     {
-                        // Portaal2 was loaded above but never actually used
-                        // here, so the second portal always rendered as
-                        // the first portal's image regardless of poortNr.
+                        // Color identifies which linked PAIR a portal
+                        // belongs to (portaalNr), not which end of that
+                        // pair it is (poortNr) -- both ends of the same
+                        // pair look identical, like any other portal-pair
+                        // mechanic. Only one pair currently exists (see
+                        // Model.java), so both ends draw as Portaal1;
+                        // Portaal2 is reserved for a second pair.
                         Portaal pt = (Portaal)vw;
-                        if (pt.getPoortNr() == 1) {
+                        if (pt.getPortaalNr() == 1) {
                             g.drawImage(Portaal1, i*grootte, j*grootte, grootte, grootte, this);
                         } else {
                             g.drawImage(Portaal2, i*grootte, j*grootte, grootte, grootte, this);
