@@ -23,9 +23,6 @@ public class Portaal extends Voorwerp
      */
     public Portaal(int portaalNr, int poortNr, int xCo, int yCo)
     {
-        // Was `this.portaalNr = portaalNr;` with no portaalNr parameter,
-        // so it self-assigned and portaalNr stayed 0 on every Portaal
-        // ever created.
         this.portaalNr = portaalNr;
         this.poortNr   = poortNr;
         this.xCo       = xCo;

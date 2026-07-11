@@ -219,11 +219,10 @@ public class View extends Canvas
                         // Color identifies which linked PAIR a portal
                         // belongs to (portaalNr), not which end of that
                         // pair it is (poortNr) -- both ends of the same
-                        // pair should look identical, like any other
-                        // portal-pair mechanic. Portaal2 was loaded above
-                        // but never actually used here; with only one
-                        // pair ever created (see Model.java), both ends
-                        // now correctly draw the same image again.
+                        // pair look identical, like any other portal-pair
+                        // mechanic. Only one pair currently exists (see
+                        // Model.java), so both ends draw as Portaal1;
+                        // Portaal2 is reserved for a second pair.
                         Portaal pt = (Portaal)vw;
                         if (pt.getPortaalNr() == 1) {
                             g.drawImage(Portaal1, i*grootte, j*grootte, grootte, grootte, this);
