@@ -15,13 +15,17 @@ public class Portaal extends Voorwerp
 
     /**
      * Constructor voor objects van class Portaal
-     * 
-     * @param poortNr Het nummer van de poort.
+     *
+     * @param portaalNr Het nummer van het portaalpaar (welk paar deze poort bij hoort).
+     * @param poortNr Het nummer van de poort (welk uiteinde van het paar).
      * @param xCo De x-positie van het portaal.
      * @param yCo De y-positie van het portaal.
      */
-    public Portaal( int poortNr, int xCo, int yCo)
+    public Portaal(int portaalNr, int poortNr, int xCo, int yCo)
     {
+        // Was `this.portaalNr = portaalNr;` with no portaalNr parameter,
+        // so it self-assigned and portaalNr stayed 0 on every Portaal
+        // ever created.
         this.portaalNr = portaalNr;
         this.poortNr   = poortNr;
         this.xCo       = xCo;
