@@ -1045,6 +1045,11 @@ public class Model
             speler.maakDood();
             return;
         }
+        if (doel instanceof Bom && speler.kanKicken())
+        {
+            kickBom(dx, dy, (Bom)doel);
+            return;
+        }
         if (doel instanceof Bom && speler.kanShiften() && !(volg instanceof Speler))
         {
             Voorwerp bom = getVoorwerp(doelX, doelY);
@@ -1128,6 +1133,39 @@ public class Model
         {
             return;
         }
+    }
+
+    /**
+     * Schop een bom in de bewegingsrichting van de speler.
+     * De bom schuift door tot net voor het eerste niet-betreedbare vakje.
+     * In tegenstelling tot shiften blijft de speler zelf op zijn plaats staan.
+     *
+     * @param dx Delta-x: verandering in de x-richting.
+     * @param dy Delta-y: verandering in de y-richting.
+     * @param bom De bom die geschopt wordt.
+     */
+    protected void kickBom(int dx, int dy, Bom bom)
+    {
+        int nieuwX = bom.getX();
+        int nieuwY = bom.getY();
+        Voorwerp volgend = getVoorwerp(nieuwX + dx, nieuwY + dy);
+        while (volgend != null && volgend.isBetreedbaar())
+        {
+            nieuwX += dx;
+            nieuwY += dy;
+            volgend = getVoorwerp(nieuwX + dx, nieuwY + dy);
+        }
+
+        if (nieuwX == bom.getX() && nieuwY == bom.getY())
+        {
+            return;
+        }
+
+        setVoorwerp(bom.getX(), bom.getY(), bom.getVwOnderBom());
+        bom.setVwOnderBom(getVoorwerp(nieuwX, nieuwY));
+        setVoorwerp(nieuwX, nieuwY, bom);
+        bom.setX(nieuwX);
+        bom.setY(nieuwY);
     }
 
     /**
